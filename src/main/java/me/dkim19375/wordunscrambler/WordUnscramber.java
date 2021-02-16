@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.Objects;
 
 public class WordUnscramber extends Application {
@@ -19,8 +20,10 @@ public class WordUnscramber extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         WordUnscramber.primaryStage = primaryStage;
-        final Parent loadingRoot = FXMLLoader.load(Objects.requireNonNull(ClassLoader.getSystemClassLoader().getResource("loading.fxml")));
-        mainRoot = FXMLLoader.load(Objects.requireNonNull(ClassLoader.getSystemClassLoader().getResource("main.fxml")));
+        final URL loadingURL = Objects.requireNonNull(getClass().getClassLoader().getResource("loading.fxml"));
+        final Parent loadingRoot = FXMLLoader.load(loadingURL);
+        final URL mainURL = Objects.requireNonNull(getClass().getClassLoader().getResource("main.fxml"));
+        mainRoot = FXMLLoader.load(mainURL);
         primaryStage.setTitle("Word Unscrambler");
         primaryStage.setScene(new Scene(loadingRoot, 1280, 720));
         primaryStage.setMaximized(true);

@@ -16,7 +16,7 @@ public class UnscramblerController {
         startingLoadingBar.setVisible(false);
         startingLoadingBar.setProgress(0.0);
         startingLoadingBar.setVisible(true);
-        this.dictionary = FileUtils.getStringPerLine(FileUtils.copyFromEmbedded("dictionary.txt", getClass()));
+        this.dictionary = FileUtils.getStringPerLine(FileUtils.copyFromEmbedded("dictionary.txt", getClass()), startingLoadingBar);
         WordUnscramber.getPrimaryStage().getScene().setRoot(WordUnscramber.getMainRoot());
     }
 }
