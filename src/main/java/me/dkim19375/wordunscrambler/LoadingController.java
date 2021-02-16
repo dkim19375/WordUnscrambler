@@ -13,6 +13,11 @@ public class LoadingController {
 
     @FXML
     private void initialize() {
+        WordUnscramber.setLoadingController(this);
+        initializeLoader();
+    }
+
+    public void initializeLoader() {
         startingLoadingBar.setVisible(false);
         startingLoadingBar.setProgress(0.0);
         startingLoadingBar.setVisible(true);

@@ -13,7 +13,7 @@
    <children>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="changeButton" alignment="CENTER" mnemonicParsing="false" prefHeight="42.0" prefWidth="404.0" text="Change Dictionary">
+            <Button fx:id="reloadButton" alignment="CENTER" mnemonicParsing="false" prefHeight="42.0" prefWidth="404.0" text="Reload Dictionary">
                <font>
                   <Font size="30.0" />
                </font>

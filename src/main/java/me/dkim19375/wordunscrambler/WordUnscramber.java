@@ -10,9 +10,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class WordUnscramber extends Application {
-    private static Stage primaryStage;
-    private static Parent mainRoot;
-    private static Parent landingRoot;
+    private static Stage primaryStage = null;
+    private static Parent mainRoot = null;
+    private static Parent landingRoot = null;
+    private static LoadingController loadingController = null;
 
     protected static void main(String[] args) {
         launch(args);
@@ -35,12 +36,21 @@ public class WordUnscramber extends Application {
     public static Parent getLandingRoot() { return landingRoot; }
 
     public static void showMain(Class<?> clazz) {
-
-        try {
-            mainRoot = FXMLLoader.load(Objects.requireNonNull(clazz.getClassLoader().getResource("main.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (mainRoot == null) {
+            try {
+                mainRoot = FXMLLoader.load(Objects.requireNonNull(clazz.getClassLoader().getResource("main.fxml")));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         primaryStage.getScene().setRoot(mainRoot);
+    }
+
+    public static LoadingController getLoadingController() {
+        return loadingController;
+    }
+
+    public static void setLoadingController(LoadingController loadingController) {
+        WordUnscramber.loadingController = loadingController;
     }
 }

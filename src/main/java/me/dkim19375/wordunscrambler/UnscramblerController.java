@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class UnscramblerController {
     @FXML
-    private Button changeButton;
+    private Button reloadButton;
     @FXML
     private Button unscrambleButton;
     @FXML
@@ -36,6 +36,11 @@ public class UnscramblerController {
             if (event.getCode() == KeyCode.ENTER) {
                 buttonAction();
             }
+        });
+        reloadButton.setOnAction((event) -> {
+            WordUnscramber.getPrimaryStage().getScene().setRoot(WordUnscramber.getLandingRoot());
+            dictionary.clear();
+            WordUnscramber.getLoadingController().initializeLoader();
         });
     }
 
