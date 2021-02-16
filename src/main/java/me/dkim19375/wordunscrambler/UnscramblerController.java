@@ -5,15 +5,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class UnscramblerController {
-    @FXML
-    private ProgressBar startingLoadingBar;
     @FXML
     private Button changeButton;
     @FXML
@@ -27,21 +23,10 @@ public class UnscramblerController {
     @FXML
     private ProgressBar unscrambleProgress;
 
-    Set<String> dictionary;
+    private static Set<String> dictionary;
 
     @FXML
     private void initialize() {
-        startingLoadingBar.setVisible(false);
-        startingLoadingBar.setProgress(0.0);
-        startingLoadingBar.setVisible(true);
-        final ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-        service.schedule(this::start, 0, TimeUnit.NANOSECONDS);
-    }
-
-    private void start() {
-        this.dictionary = FileUtils.getStringPerLine(FileUtils.copyFromEmbedded("dictionary.txt", getClass()),
-                startingLoadingBar);
-        WordUnscramber.showMain(getClass());
         unscrambleProgress.setVisible(false);
         unscrambledWordsList.setVisible(false);
         unscrambledWordsLabel.setVisible(false);
@@ -59,36 +44,37 @@ public class UnscramblerController {
     public Set<String> unscramble() {
         final ObservableList<String> wordsList = FXCollections.observableArrayList();
         final ProgressBar bar = unscrambleProgress;
-        final Set<String> dictionary = new HashSet<>(this.dictionary);
+        final Set<String> dictionary = new HashSet<>(UnscramblerController.dictionary);
         bar.setProgress(0.0);
         final double totalAmount = dictionary.size();
         double forEach = 1.0 / totalAmount;
         final Set<String> words = new HashSet<>();
         for (String word : dictionary) {
             bar.setProgress(bar.getProgress() + forEach);
-            final char[] input = unscrambleText.getText().toCharArray();
-            final char[] match = word.toCharArray();
-            if (input.length != match.length) {
-                continue;
-            }
-            int i = 0;
-            boolean valid = true;
-            for (char inputChar : input) {
-                if (inputChar == '*') {
-                    continue;
-                }
-                if (inputChar == match[i]) {
-                    continue;
-                }
-                valid = false;
-            }
-            if (!valid) {
+            if (!isSame(unscrambleText.getText(), word)) {
                 continue;
             }
             words.add(word);
             wordsList.add(word);
             unscrambledWordsList.setItems(wordsList);
         }
+        System.out.println(words);
         return words;
+    }
+
+    public boolean isSame(final String first, final String second) {
+        final char[] firstChar = first.toLowerCase().toCharArray();
+        Arrays.sort(firstChar);
+        final char[] secondChar = first.toLowerCase().toCharArray();
+        Arrays.sort(secondChar);
+        return firstChar == secondChar;
+    }
+
+    public static Set<String> getDictionary() {
+        return dictionary;
+    }
+
+    public static void setDictionary(Set<String> dictionary) {
+        UnscramblerController.dictionary = dictionary;
     }
 }

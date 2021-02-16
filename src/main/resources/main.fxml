@@ -9,12 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.dkim19375.wordunscrambler.UnscramblerController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="changeButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" text="Change Dictionary">
+            <Button fx:id="changeButton" alignment="CENTER" mnemonicParsing="false" prefHeight="42.0" prefWidth="404.0" text="Change Dictionary">
                <font>
                   <Font size="30.0" />
                </font>
@@ -24,7 +23,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <TextField fx:id="unscrambleText" alignment="CENTER" prefHeight="32.0" prefWidth="199.0" />
-            <Button fx:id="unscrambleButton" alignment="CENTER" mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0" text="Unscramble">
+            <Button fx:id="unscrambleButton" alignment="CENTER" mnemonicParsing="false" prefHeight="48.0" prefWidth="308.0" text="Unscramble">
                <font>
                   <Font size="32.0" />
                </font>
