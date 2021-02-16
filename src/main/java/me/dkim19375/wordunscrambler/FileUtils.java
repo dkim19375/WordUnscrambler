@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class FileUtils {
     public static File copyFromEmbedded(String resource, Class<?> clazz) {
@@ -32,13 +33,11 @@ public class FileUtils {
     }
     public static Set<String> getStringPerLine(File file, ProgressBar bar) {
         Set<String> words = new HashSet<>();
-        double current = 0.0;
         if (bar != null) {
             bar.setProgress(0.0);
         }
-        final long totalAmount = getLines(file);
-        //noinspection IntegerDivisionInFloatingPointContext
-        double forEach = 1 / (totalAmount == 0 ? 1 : totalAmount);
+        final double totalAmount = getLines(file);
+        double forEach = 1.0 / (totalAmount == 0 ? 1 : totalAmount);
         final Scanner scanner;
         try {
             scanner = new Scanner(file);
@@ -52,6 +51,11 @@ public class FileUtils {
             if (bar != null) {
                 bar.setProgress(bar.getProgress() + forEach);
             }
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         scanner.close();
         return words;
