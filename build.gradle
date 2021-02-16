@@ -25,6 +25,10 @@ launch4j {
     mainClassName = project.mainClassName
     copyConfigurable = []
     jar = "../libs/${project.tasks.shadowJar.archiveName}"
+    version = project.version
+    textVersion = project.version
+    fileDescription = 'A program to unscramble words'
+    windowTitle = project.version
 }
 
 def currentOS = DefaultNativePlatform.currentOperatingSystem;
@@ -41,6 +45,11 @@ java {
     modularity.inferModulePath = true
 }
 
+distTar {
+    compression = Compression.GZIP
+    archiveExtension = "tar.gz"
+}
+
 repositories {
     mavenCentral()
 }
@@ -54,3 +63,4 @@ dependencies {
 }
 
 shadowJar.finalizedBy createExe
+shadowJar.finalizedBy distTar
