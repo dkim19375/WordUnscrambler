@@ -10,9 +10,9 @@ import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public class FileUtils {
+
     public static File copyFromEmbedded(String resource, Class<?> clazz) {
         final File dest = new File(resource);
         final URL from = clazz.getClassLoader().getResource(resource);
@@ -26,6 +26,13 @@ public class FileUtils {
             return null;
         }
         return dest;
+    }
+
+    public static File getExternalFile(String fileName, Class<?> clazz) {
+        if (new File(fileName).exists()) {
+            return new File(fileName);
+        }
+        return copyFromEmbedded(fileName, clazz);
     }
 
     public static Set<String> getStringPerLine(File file) {

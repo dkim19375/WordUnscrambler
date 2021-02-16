@@ -36,6 +36,10 @@
             <Font size="39.0" />
          </font>
       </Label>
-      <ListView fx:id="unscrambledWordsList" prefHeight="200.0" prefWidth="200.0" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ListView fx:id="unscrambledWordsList" prefHeight="100.0" prefWidth="177.0" />
+         </children>
+      </HBox>
    </children>
 </VBox>

@@ -21,8 +21,8 @@ public class LoadingController {
     }
 
     private void start() {
-        UnscramblerController.setDictionary(FileUtils.getStringPerLine(FileUtils.copyFromEmbedded("dictionary.txt", getClass()),
-                startingLoadingBar));
+        UnscramblerController.setDictionary(FileUtils.getStringPerLine(FileUtils.getExternalFile("dictionary.txt",
+                getClass()), startingLoadingBar));
         WordUnscramber.showMain(getClass());
     }
 }
