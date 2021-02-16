@@ -14,6 +14,10 @@ version '1.0.0'
 sourceCompatibility = targetCompatibility = 11
 compileJava.options.encoding = 'UTF-8'
 
+shadowJar {
+    minimize()
+}
+
 javafx {
     modules = [ 'javafx.controls' , 'javafx.fxml' ]
 }
@@ -27,10 +31,12 @@ launch4j {
 
 repositories {
     mavenCentral()
+    maven { url = 'http://nexus.gluonhq.com/nexus/content/repositories/releases/' }
 }
 
 dependencies {
     implementation 'commons-io:commons-io:2.8.0'
+    implementation 'com.gluonhq:charm-glisten:6.0.6'
 }
 
 shadowJar.finalizedBy createExe

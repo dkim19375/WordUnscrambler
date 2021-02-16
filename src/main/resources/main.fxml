@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.dkim19375.wordunscrambler.UnscramblerController">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="changeButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" text="Change Dictionary">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="unscrambleText" alignment="CENTER" prefHeight="32.0" prefWidth="199.0" />
+            <Button fx:id="unscrambleButton" alignment="CENTER" mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0" text="Unscramble">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <ProgressBar fx:id="unscrambleProgress" prefHeight="26.0" prefWidth="350.0" progress="0.0" />
+      <Label fx:id="unscrambledWordsLabel" alignment="CENTER" text="Unscrambled Words:">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+      <ListView fx:id="unscrambledWordsList" prefHeight="200.0" prefWidth="200.0" />
+   </children>
+</VBox>
