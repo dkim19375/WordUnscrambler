@@ -22,6 +22,12 @@ javafx {
     modules = [ 'javafx.controls' , 'javafx.fxml' ]
 }
 
+/*jlink {
+    launcher {
+        name = 'wordUnscrambler'
+    }
+}*/
+
 launch4j {
     outfile = "${project.name}-${project.version}.exe"
     mainClassName = project.mainClassName
@@ -31,12 +37,10 @@ launch4j {
 
 repositories {
     mavenCentral()
-    maven { url = 'http://nexus.gluonhq.com/nexus/content/repositories/releases/' }
 }
 
 dependencies {
     implementation 'commons-io:commons-io:2.8.0'
-    implementation 'com.gluonhq:charm-glisten:6.0.6'
 }
 
 shadowJar.finalizedBy createExe

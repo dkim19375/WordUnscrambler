@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -30,18 +31,25 @@ public class UnscramblerController {
         unscrambleProgress.setVisible(false);
         unscrambledWordsList.setVisible(false);
         unscrambledWordsLabel.setVisible(false);
-        unscrambleButton.setOnAction((event) -> {
-            unscrambleProgress.setVisible(true);
-            final ObservableList<String> words = FXCollections.observableArrayList();
-            unscrambledWordsList.setItems(words);
-            unscrambledWordsList.setScaleX(2.0);
-            unscrambledWordsList.setScaleY(2.0);
-            unscrambledWordsList.setScaleZ(2.0);
-            unscrambledWordsList.setVisible(true);
-            unscrambledWordsLabel.setVisible(true);
-            unscramble();
-            unscrambleProgress.setVisible(false);
+        unscrambleButton.setOnAction((event) -> buttonAction());
+        unscrambleText.setOnKeyPressed((event) -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                buttonAction();
+            }
         });
+    }
+
+    public void buttonAction() {
+        unscrambleProgress.setVisible(true);
+        final ObservableList<String> words = FXCollections.observableArrayList();
+        unscrambledWordsList.setItems(words);
+        unscrambledWordsList.setScaleX(2.0);
+        unscrambledWordsList.setScaleY(2.0);
+        unscrambledWordsList.setScaleZ(2.0);
+        unscrambledWordsList.setVisible(true);
+        unscrambledWordsLabel.setVisible(true);
+        unscramble();
+        unscrambleProgress.setVisible(false);
     }
 
     public void unscramble() {
