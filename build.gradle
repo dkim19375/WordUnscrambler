@@ -1,8 +1,9 @@
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
 plugins {
     id 'java'
     id 'application'
     id 'edu.sc.seis.launch4j' version '2.4.9'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
@@ -14,19 +15,10 @@ version '1.0.0'
 sourceCompatibility = targetCompatibility = 11
 compileJava.options.encoding = 'UTF-8'
 
-shadowJar {
-    minimize()
+application {
+    mainModule = 'WordUnscrambler.main'
+    mainClass = 'me.dkim19375.wordunscrambler.WordUnscramblerMain'
 }
-
-javafx {
-    modules = [ 'javafx.controls' , 'javafx.fxml' ]
-}
-
-/*jlink {
-    launcher {
-        name = 'wordUnscrambler'
-    }
-}*/
 
 launch4j {
     outfile = "${project.name}-${project.version}.exe"
@@ -35,12 +27,30 @@ launch4j {
     jar = "../libs/${project.tasks.shadowJar.archiveName}"
 }
 
+def currentOS = DefaultNativePlatform.currentOperatingSystem;
+def platform
+if (currentOS.isWindows()) {
+    platform = 'win'
+} else if (currentOS.isLinux()) {
+    platform = 'linux'
+} else if (currentOS.isMacOsX()) {
+    platform = 'mac'
+}
+
+java {
+    modularity.inferModulePath = true
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
     implementation 'commons-io:commons-io:2.8.0'
+    implementation "org.openjfx:javafx-base:11.0.2:${platform}"
+    implementation "org.openjfx:javafx-controls:11.0.2:${platform}"
+    implementation "org.openjfx:javafx-graphics:11.0.2:${platform}"
+    implementation "org.openjfx:javafx-fxml:11.0.2:${platform}"
 }
 
 shadowJar.finalizedBy createExe

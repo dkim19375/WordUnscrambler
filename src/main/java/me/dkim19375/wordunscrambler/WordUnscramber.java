@@ -35,6 +35,7 @@ public class WordUnscramber extends Application {
     public static Parent getLandingRoot() { return landingRoot; }
 
     public static void showMain(Class<?> clazz) {
+
         try {
             mainRoot = FXMLLoader.load(Objects.requireNonNull(clazz.getClassLoader().getResource("main.fxml")));
         } catch (IOException e) {
